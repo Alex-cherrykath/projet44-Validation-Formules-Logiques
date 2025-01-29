@@ -3,6 +3,7 @@
 #include<string>
 #include<vector>
 int main(){
+    while(true){
     //ensembles des variables a utiliser
     std::string varAND,varOR,varNOT,varXoR;
     std::string v1,v2,v3,v4;
@@ -13,11 +14,18 @@ int main(){
      int slog[4];
      int Tvar,Tvar1,Tvar2,Tvar3,Tvar4;
 
-     std::cout<<"************** BIENVENUE A VOUS!**************\n";
-    std::cout<<"entrez une formule logique a maximum 5 variabble\n";
+     std::cout<<"************** BIENVENUE A VOUS!**************\n\n";
+    std::cout<<"entrez une formule logique a maximum 5 variabble  et 'quit' si vous voulez quiter\n";
+    std::cout<<"pour des soucis de code XOR sera considerer ssi il est ecris avec o minuscule merci:)\n";
+
     std::getline(std::cin,logique);
-    std::cout<<logique<<"\n";
+     if (logique == "quit") {
+
+            break; // Sortir de la boucle si l'utilisateur tape 'quit'
+        }
+    std::cout<<"la formule logique a ete saisie dans cet orde\n"<<logique<<"\n";
     tailleformule(logique);
+    
   //appel de nos foction de verification de porte logique
     veriflogAND(logique,varAND,portionlogAND);
     veriflogOR(logique, varOR,portionlogOR);
@@ -72,6 +80,6 @@ int main(){
          }else if(Tvar==3&&v1=="OR"&&v2=="OR"){//si la premiere porte est OR et la seconde OR
          OROR(slog);
          }
-    
+    }
 return 0;
 }
