@@ -12,6 +12,8 @@ int main(){
     std::string logique="";
     std::string portionlogAND,portionlogOR,portionlogNOT,portionlogXoR;
      int slog[4];
+    int slog1[8];
+     int slog2[16];
      int Tvar,Tvar1,Tvar2,Tvar3,Tvar4;
 
      std::cout<<"************** BIENVENUE A VOUS!**************\n\n";
@@ -79,7 +81,48 @@ int main(){
          ANDAND(slog);
          }else if(Tvar==3&&v1=="OR"&&v2=="OR"){//si la premiere porte est OR et la seconde OR
          OROR(slog);
+         }else if(Tvar==4&&v1=="AND"&&v2=="OR"&&v3=="XoR"){//la premiere porte est AND 2emOR 3eme XOR
+          ANDORXOR(slog);
+         }else if(Tvar==4&&v1=="AND"&&v2=="XoR"&&v3=="OR"){//porte 1 AND 2eme XOR 3emeOR
+          ANDXOROR(slog2);
+         }else if(Tvar==4&&v1=="OR"&&v2=="AND"&&v3=="XoR"){//la premiere porte OR 2eme AND 3eme XOR
+          ORANDXOR(slog2);
+         }else if(Tvar==4&&v1=="XoR"&&v2=="OR"&&v3=="AND"){//la premiere porte XOR 2emeOR 3eme AND
+          XORORAND(slog2);
+         }else if(Tvar==4&&v1=="OR"&&v2=="XoR"&&v3=="AND"){//la premiere porte XOR 2eme OR 3eme AND
+          ORXORAND(slog2);
+         }else if(Tvar==4&&v1=="XoR"&&v2=="AND"&&v3=="OR"){//fait
+          XORANDOR(slog2);
          }
+
+       /*  else if(Tvar==4&&v1=="NOT"&&v2=="AND"&&v3=="OR"&&v4=="XoR"){
+          NOTANDORXOR(slog);
+         }else if(Tvar==4&&v1=="NOT"&&v2=="AND"&&v3=="XoR"&&v4=="OR"){
+          NOTANDXOROR(slog);
+         }else if(Tvar==4&&v1=="NOT"&&v2=="OR"&&v3=="AND"&&v4=="XoR"){
+          NOTORANDXOR(slog);
+         }else if(Tvar==4&&v1=="NOT"&&v2=="XoR"&&v3=="OR"&&v4=="AND"){
+          NOTXORORAND(slog);
+         }else if(Tvar==4&&v1=="NOT"&&v2=="OR"&&v3=="XoR"&&v4=="AND"){
+          NOTORXORAND(slog);
+         }else if(Tvar==4&&v1=="NOT"&&v2=="XoR"&&v3=="AND"&&v4=="OR"){
+          NOTXORANDOR(slog);
+         }
+      
+
+      else if(Tvar==4&&v1=="AND"&&v2=="OR"&&v3=="NOT"&&v4=="XoR"){
+          ANDORNOTXOR(slog);
+         }else if(Tvar==4&&v1=="AND"&&v2=="XoR"&&v3=="NOT"&&v4=="OR"){
+          ANDXORNOTOR(slog);
+         }else if(Tvar==4&&v1=="OR"&&v2=="AND"&&v3=="NOT"&&v4=="XoR"){
+          ORANDNOTXOR(slog);
+         }else if(Tvar==4&&v1=="XoR"&&v2=="OR"&&v3=="NOT"&&v4=="AND"){
+          XORORNOTAND(slog);
+         }else if(Tvar==4&&v1=="OR"&&v2=="XoR"&&v3=="NOT"&&v4=="AND"){
+          ORXORNOTAND(slog);
+         }else if(Tvar==4&&v1=="XoR"&&v2=="AND"&&v3=="NOT"&&v4=="OR"){
+          XORANDNOTOR(slog);
+         }*/
     }
 return 0;
 }
