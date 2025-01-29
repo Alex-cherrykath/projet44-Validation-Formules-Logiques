@@ -34,6 +34,13 @@ void ANDAND(int sol[8]);
 void ORAND(int sol[8]);
 void ORXOR(int sol[8]);
 void OROR(int sol[8]);
+//fontion a 4 variables 3 portes
+void ORANDXOR(int sol[16]);
+void ANDXOROR(int sol[16]);
+void ANDORXOR(int sol[16]);
+void XORORAND(int sol[16]);
+void ORXORAND(int sol[16]);
+void XORANDOR(int sol[16]);
 
 
 
