@@ -12,7 +12,8 @@ int main(){
     std::string portionlogAND,portionlogOR,portionlogNOT,portionlogXoR;
      int slog[4];
      int Tvar,Tvar1,Tvar2,Tvar3,Tvar4;
-    
+
+     std::cout<<"************** BIENVENUE A VOUS!**************\n";
     std::cout<<"entrez une formule logique a maximum 5 variabble\n";
     std::getline(std::cin,logique);
     std::cout<<logique<<"\n";
