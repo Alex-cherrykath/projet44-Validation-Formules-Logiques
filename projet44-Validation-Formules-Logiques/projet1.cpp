@@ -48,7 +48,7 @@ void et(int s[4]  ){
         std::cout<<s[j];
         std::cout<<"\n";
     }
-    std::cout<<"la formule est vrai uniquement pour la var1=1 et la var2=1\n";
+    std::cout<<"la formule est vrai uniquement pour la var1=1 et var 2=1\n";
 
 }
 //fonction du ou logique
@@ -77,7 +77,7 @@ void OU(int s[4]  ){
         std::cout<<s[j];
         std::cout<<"\n";
     }
-    std::cout<<"la formule est vrai tantque lune des 2 variable est vrai\n";
+    std::cout<<"la formule est vrai tantque lune des 2 variable est vrai comme indiquer dans le tableau \n";
 
 }
 //fonction logique NOT
@@ -96,7 +96,7 @@ void non( int s[2]){
             std::cout<<val[j];
         std::cout<<" "<<s[j]<<"\n";
         }
-    
+
 }
 //fonction logique xOR
 void OUEX(int s[4]){
@@ -552,64 +552,7 @@ void XORXOR(int sol[8]){
         std::cout<<"\n";
     }
 }
-//fonction dassociation de 2 porte logique a 3variables
-void ANDOR(int sol[8]){
-      int val1[8];
-    int val2[8];
-    int val3[8];
 
-    val1[0]=0;
-   val1[1]=0;
-   val1[2]=0;
-   val1[3]=0;
-   val1[4]=1;
-   val1[5]=1;
-   val1[6]=1;
-   val1[7]=1;
-
-   val2[0]=0;
-   val2[1]=0;
-   val2[2]=1;
-   val2[3]=1;
-   val2[4]=0;
-   val2[5]=0;
-   val2[6]=1;
-   val2[7]=1;
-
-
-   val3[0]=0;
-   val3[1]=1;
-   val3[2]=0;
-   val3[3]=1;
-   val3[4]=0;
-   val3[5]=1;
-   val3[6]=0;
-   val3[7]=1;
-
-   int  inter1[8];
-   //AND
-   for(int i=0;i<=7;i++){
-    if(val1[i]==1&&val2[i]==1){
-        inter1[i]=1;
-      }else{
-        inter1[i]=0;
-      }
-      //OR
-     if(inter1[i]==1||val3[i]==1){
-            sol[i]=1;
-        }else{
-            sol[i]=0;
-        }
-   }
-    for(int j=0;j<=7;j++){
-         std::cout<<val1[j]<<"|";
-          std::cout<<val2[j]<<"|";
-          std::cout<<val3[j]<<"|";
-          std::cout<<inter1[j]<<"|";
-        std::cout<<sol[j];
-        std::cout<<"\n";
-    }
-}
 //fonction dassociation de 2 porte logique a 3variables
 void ANDXOR(int sol[8]){
       int val1[8];
@@ -768,7 +711,7 @@ void ORAND(int sol[8]){
       }else{
         inter1[i]=0;
       }
-      //and
+      //AND
      if(inter1[i]==1&&val3[i]==1){
             sol[i]=1;
         }else{
@@ -784,6 +727,7 @@ void ORAND(int sol[8]){
         std::cout<<"\n";
     }
 }
+
 //fonction dassociation de 2 porte logique a 3variables
 void ORXOR(int sol[8]){
       int val1[8];
@@ -901,3 +845,309 @@ void OROR(int sol[8]){
     }
 }
 
+//foction dassociatio de 3 portes et 4 variables
+void ANDOR(int sol[8]){
+      int val1[8];
+    int val2[8];
+    int val3[8];
+
+    val1[0]=0;
+   val1[1]=0;
+   val1[2]=0;
+   val1[3]=0;
+   val1[4]=1;
+   val1[5]=1;
+   val1[6]=1;
+   val1[7]=1;
+
+   val2[0]=0;
+   val2[1]=0;
+   val2[2]=1;
+   val2[3]=1;
+   val2[4]=0;
+   val2[5]=0;
+   val2[6]=1;
+   val2[7]=1;
+
+
+   val3[0]=0;
+   val3[1]=1;
+   val3[2]=0;
+   val3[3]=1;
+   val3[4]=0;
+   val3[5]=1;
+   val3[6]=0;
+   val3[7]=1;
+
+   int  inter1[8];
+   //AND
+   for(int i=0;i<=7;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //OR
+     if(inter1[i]==1||val3[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=7;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+
+//fonction dassociation de 3 porte logique a 4variables
+void ORANDXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter1[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+
+//fonction dassociation de 3 porte logique a 4variables
+void ANDXOROR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter1[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ANDORXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter1[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void XORORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter1[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ORXORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter1[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void XORANDOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter1[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+}
