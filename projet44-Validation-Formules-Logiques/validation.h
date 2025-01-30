@@ -6,8 +6,10 @@ void tailleformule(const std::string&logique);
 std::string supprimedouble(const std::string& chaine);
 
 bool sivide(const std::string& chaine);
+//verification de tautologie
+void verifiertautologie(int tab[],int taille);
 //fonction du et logique et ou logique
-void et(int s[4]  );
+void et(int s[4] );
 void OU(int s[4]  );
 //fonction logique NOT
 void non( int s[2]);
@@ -41,6 +43,25 @@ void ANDORXOR(int sol[16]);
 void XORORAND(int sol[16]);
 void ORXORAND(int sol[16]);
 void XORANDOR(int sol[16]);
+void ANDORAND(int sol[16]);
+void XORORXOR(int sol[16]);
+void ORANDOR(int sol[16]);
+void XORANDXOR(int sol[16]);
+void ANDXORAND(int sol[16]);
+void ORXOROR(int sol[16]);
+//fontion a 4 variables 4 portes
+void NOTORANDXOR(int sol[16]);
+void NOTANDXOROR(int sol[16]);
+void NOTANDORXOR(int sol[16]);
+void NOTXORORAND(int sol[16]);
+void NOTORXORAND(int sol[16]);
+void NOTXORANDOR(int sol[16]);
+void ORANDNOTXOR(int sol[16]);
+void ANDXORNOTOR(int sol[16]);
+void ANDORNOTXOR(int sol[16]);
+void XORORNOTAND(int sol[16]);
+void ORXORNOTAND(int sol[16]);
+void XORANDNOTOR(int sol[16]);
 
 
 
