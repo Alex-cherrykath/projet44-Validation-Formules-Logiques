@@ -2,11 +2,23 @@
 #include "validation.h"
 #include<string>
 #include<vector>
-
 //fonction pour connaitre la taille dune chaine de caractere
 void tailleformule(const std::string&logique){
      int nombredecaractere=logique.length();
      std::cout<<"la taille de la formule logique est  "<<nombredecaractere<<"  caractere\n";
+}
+void verifiertautologie(int tab[],int taille){
+bool tot =true;
+for(int i=0;i<taille;i++){
+    if(tab[i]!=1){
+        tot=false;
+        break;
+    }
+}
+if(tot){
+    std::cout<<"la formule que vous avez saisie est une tautologie\n";
+}
+
 }
 
 //fonction de suppression de doublon
@@ -48,7 +60,9 @@ void et(int s[4]  ){
           std::cout<<val2[j]<<"|";
         std::cout<<s[j];
         std::cout<<"\n";
+       
     }
+    verifiertautologie(s,4);
     std::cout<<"la formule est vrai uniquement pour la var1=1 et var 2=1\n";
 
 }
@@ -78,6 +92,7 @@ void OU(int s[4]  ){
         std::cout<<s[j];
         std::cout<<"\n";
     }
+     verifiertautologie(s,4);
     std::cout<<"la formule est vrai tantque lune des 2 variable est vrai comme indiquer dans le tableau \n";
 
 }
@@ -97,7 +112,7 @@ void non( int s[2]){
             std::cout<<val[j];
         std::cout<<" "<<s[j]<<"\n";
         }
-
+     verifiertautologie(s,4);
 }
 //fonction logique xOR
 void OUEX(int s[4]){
@@ -125,6 +140,8 @@ void OUEX(int s[4]){
         std::cout<<s[j];
         std::cout<<"\n";
     }
+
+     verifiertautologie(s,4);
     std::cout<<"la formule est vrai pour var1 differente de var2\n";
 
 }
@@ -138,13 +155,11 @@ void veriflogAND(const std::string& logique,std::string& result,std::string& res
     while(pos< logique.size()&&(pos=logique.find(mot,pos))!=std::string::npos){
         
         if(pos>0){
-             
             //stockage de la variable avant and
             char varavants=logique[pos-1];
             if(varavants!='('&& varavants!=' '&& varavants!=')'){
          resultlog +=varavants;
            varavant.push_back(varavants);
-                 
         //   std::cout<<" la variable avant AND est  "<<logique[pos-1]<<"\n";
            }
        
@@ -177,16 +192,14 @@ void veriflogAND(const std::string& logique,std::string& result,std::string& res
         result+=var;
     }
 }
- /* fonction de verification de si il exsiste une porte OR dans la formule saisie
-si oui affiche les variable qui se trouve avant et apres la porte */
-
+// //fonction de verification de si il exsiste une porte OR dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
 void veriflogOR(const std::string& logique, std::string& result,std::string& resultlog){
     std::string mot="OR";
     size_t pos=0;
     std::vector<char>varavant;
      std::vector<char>varapres;
-     
-     // std::vector<char>varap; //je viens d'ajouter
+     // std::vector<char>varap;//je viens dajouter
+
 
     while(pos< logique.size()&&(pos=logique.find(mot,pos))!=std::string::npos){
        // std::cout<<"mot trouver a la position "<<pos+1<<"\n";
@@ -197,7 +210,6 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
             if(varavants!='('&& varavants!=' '&& varavants!=')'){
             resultlog +=varavants;
            varavant.push_back(varavants);
-                 
          //  std::cout<<"et la variable avant OR est  "<<logique[pos-1]<<"\n";
            }
        
@@ -216,11 +228,11 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
                varapres.push_back(varapress); 
                 
             }
-          /*  if(varaps==' '||varaps=='('){
-                varaps++;
-            varap.push_back(varaps);//je viens d'ajouter
-            }
-           std::cout<<"la varible apres OR est  "<<varapress<<"\n"; */
+          //  if(varaps==' '||varaps=='('){
+            //    varaps++;
+           // varap.push_back(varaps);//je viens dajouter
+            //}
+           // std::cout<<"la varible apres OR est  "<<varapress<<"\n";
             
         }
         
@@ -233,9 +245,13 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
     for(char var:varavant){
         result+=var;
     }
-     for(char var:varapres){  //c'etait varapres mais si tu veux ->varap
+     for(char var:varapres){//cetait varapres mais si tu veux ->varap
         result+=var;
-    }   
+    }
+
+    
+ 
+     
 }
  
  //fonction de verification de si il exsiste une porte NOT dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
@@ -286,8 +302,13 @@ void veriflogNOT(const std::string& logique, std::string& result,std::string& re
      for(char var:varapres){
         result+=var;
     }
+
+    
+
      
 }
+
+
 
 //fonction de verification de si il exsiste une porte AND dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
 void veriflogXoR(const std::string& logique,std::string& result,std::string& resultlog){
@@ -337,7 +358,7 @@ void veriflogXoR(const std::string& logique,std::string& result,std::string& res
         result+=var;
     }
 }
-//fonctions
+//fonction
 void affect(std::string chaine,std::string & var1,std::string & var2,std::string & var3,std::string & var4){
     int trouve=0;
     size_t pos =0;
@@ -432,6 +453,8 @@ void XORAND(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+     verifiertautologie(sol,8);
 }
 //fonction dassociation de 2 porte logique a 3variables
 void XOROR(int sol[8]){
@@ -490,6 +513,7 @@ void XOROR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+    verifiertautologie(sol,8);
 }
 //fonction dassociation de 2 porte logique a 3variables
 void XORXOR(int sol[8]){
@@ -514,6 +538,7 @@ void XORXOR(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
+
 
    val3[0]=0;
    val3[1]=1;
@@ -547,6 +572,8 @@ void XORXOR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+    verifiertautologie(sol,8);
 }
 
 //fonction dassociation de 2 porte logique a 3variables
@@ -573,6 +600,7 @@ void ANDXOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
+
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -605,6 +633,7 @@ void ANDXOR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+verifiertautologie(sol,8);
 }
 //fonction dassociation de 2 porte logique a 3variables
 void ANDAND(int sol[8]){
@@ -629,6 +658,7 @@ void ANDAND(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
+
 
    val3[0]=0;
    val3[1]=1;
@@ -662,6 +692,7 @@ void ANDAND(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+    verifiertautologie(sol,8);
 }
 //fonction dassociation de 2 porte logique a 3variables
 void ORAND(int sol[8]){
@@ -686,6 +717,7 @@ void ORAND(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
+
 
    val3[0]=0;
    val3[1]=1;
@@ -719,6 +751,8 @@ void ORAND(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+    verifiertautologie(sol,8);
 }
 
 //fonction dassociation de 2 porte logique a 3variables
@@ -745,6 +779,7 @@ void ORXOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
+
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -777,6 +812,7 @@ void ORXOR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+    verifiertautologie(sol,8);
 }
 //fonction dassociation de 2 porte logique a 3variables
 void OROR(int sol[8]){
@@ -801,6 +837,7 @@ void OROR(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
+
 
    val3[0]=0;
    val3[1]=1;
@@ -834,6 +871,8 @@ void OROR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+    verifiertautologie(sol,8);
 }
 
 //foction dassociatio de 3 portes et 4 variables
@@ -859,6 +898,7 @@ void ANDOR(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
+
 
    val3[0]=0;
    val3[1]=1;
@@ -892,10 +932,11 @@ void ANDOR(int sol[8]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+    verifiertautologie(sol,8);
 }
 
 
-//fonctions dassociation de 3 porte logique a 4variables
+//fonction dassociation de 3 porte logique a 4variables
 void ORANDXOR(int sol[16]){
       int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
       int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
@@ -934,7 +975,10 @@ void ORANDXOR(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+    verifiertautologie(sol,16);
 }
+
 
 //fonction dassociation de 3 porte logique a 4variables
 void ANDXOROR(int sol[16]){
@@ -975,6 +1019,7 @@ void ANDXOROR(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+     verifiertautologie(sol,16);
 }
 
 //fonction dassociation de 3 porte logique a 4variables
@@ -1016,6 +1061,7 @@ void ANDORXOR(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+     verifiertautologie(sol,16);
 }
 
 //fonction dassociation de 3 porte logique a 4variables
@@ -1057,6 +1103,7 @@ void XORORAND(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+     verifiertautologie(sol,16);
 }
 
 //fonction dassociation de 3 porte logique a 4variables
@@ -1098,6 +1145,8 @@ void ORXORAND(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+
+     verifiertautologie(sol,16);
 }
 
 //fonction dassociation de 3 porte logique a 4variables
@@ -1139,4 +1188,860 @@ void XORANDOR(int sol[16]){
         std::cout<<sol[j];
         std::cout<<"\n";
     }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ANDORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter1[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+
+//fonction dassociation de 3 porte logique a 4variables
+void XORORXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter1[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ORANDOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter1[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void XORANDXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter1[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ANDXORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter1[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 3 porte logique a 4variables
+void ORXOROR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter1[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+
+     verifiertautologie(sol,16);
+}
+
+
+
+
+//fonction dassociation de 4 porte logique a 4variables
+void NOTANDORXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter3[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void NOTANDXOROR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter3[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void NOTORANDXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter3[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void NOTXORORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }//NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(OR)
+        if(inter3[i]==1||inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void NOTORXORAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(XOR)
+        if(inter3[i]!=inter2[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+ 
+//fonction dassociation de 4 porte logique a 4variables
+void NOTXORANDOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //NOT
+      if(inter1[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //ratio(AND)
+        if(inter3[i]==1&&inter2[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+
+//fonction dassociation de 4 porte logique a 4variables
+void ANDORNOTXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(OR)
+        if(inter3[i]==1||inter1[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void ANDXORNOTOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //AND
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1&&val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(XOR)
+        if(inter3[i]!=inter1[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void ORANDNOTXOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+     
+      //XOR
+     if(val3[i]!=val4[i]){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+         //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(AND)
+        if(inter3[i]==1&&inter1[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void XORORNOTAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(OR)
+        if(inter3[i]==1||inter1[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void ORXORNOTAND(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //OR
+   for(int i=0;i<=15;i++){
+    if(val1[i]==1||val2[i]==1){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      
+      //AND
+     if(val3[i]==1&&val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(XOR)
+        if(inter3[i]!=inter1[i]){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
+}
+
+//fonction dassociation de 4 porte logique a 4variables
+void XORANDNOTOR(int sol[16]){
+      int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+      int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
+      int val3[16]={0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1};
+      int val4[16]={0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1};
+
+   int  inter1[16];
+   int  inter2[16];
+   int  inter3[16];
+   //XOR
+   for(int i=0;i<=15;i++){
+    if(val1[i]!=val2[i]){
+        inter1[i]=1;
+      }else{
+        inter1[i]=0;
+      }
+      
+      //OR
+     if(val3[i]==1||val4[i]==1){
+            inter2[i]=1;
+        }else{
+            inter2[i]=0;
+        }
+        //NOT
+      if(inter2[i]==1){
+        inter3[i]=0;
+      }else{
+        inter3[i]=1;
+      }
+        //ratio(AND)
+        if(inter3[i]==1&&inter1[i]==1){
+            sol[i]=1;
+        }else{
+            sol[i]=0;
+        }
+   }
+    for(int j=0;j<=15;j++){
+         std::cout<<val1[j]<<"|";
+          std::cout<<val2[j]<<"|";
+          std::cout<<val3[j]<<"|";
+          std::cout<<val4[j]<<"|";
+          std::cout<<inter1[j]<<"|";
+          std::cout<<inter2[j]<<"|";
+        std::cout<<sol[j];
+        std::cout<<"\n";
+    }
+     verifiertautologie(sol,16);
 }
