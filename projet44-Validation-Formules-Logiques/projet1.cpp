@@ -2,6 +2,7 @@
 #include "validation.h"
 #include<string>
 #include<vector>
+
 //fonction pour connaitre la taille dune chaine de caractere
 void tailleformule(const std::string&logique){
      int nombredecaractere=logique.length();
@@ -137,11 +138,13 @@ void veriflogAND(const std::string& logique,std::string& result,std::string& res
     while(pos< logique.size()&&(pos=logique.find(mot,pos))!=std::string::npos){
         
         if(pos>0){
+             
             //stockage de la variable avant and
             char varavants=logique[pos-1];
             if(varavants!='('&& varavants!=' '&& varavants!=')'){
          resultlog +=varavants;
            varavant.push_back(varavants);
+                 
         //   std::cout<<" la variable avant AND est  "<<logique[pos-1]<<"\n";
            }
        
@@ -174,14 +177,16 @@ void veriflogAND(const std::string& logique,std::string& result,std::string& res
         result+=var;
     }
 }
-// //fonction de verification de si il exsiste une porte OR dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
+ /* fonction de verification de si il exsiste une porte OR dans la formule saisie
+si oui affiche les variable qui se trouve avant et apres la porte */
+
 void veriflogOR(const std::string& logique, std::string& result,std::string& resultlog){
     std::string mot="OR";
     size_t pos=0;
     std::vector<char>varavant;
      std::vector<char>varapres;
-     // std::vector<char>varap;//je viens dajouter
-
+     
+     // std::vector<char>varap; //je viens d'ajouter
 
     while(pos< logique.size()&&(pos=logique.find(mot,pos))!=std::string::npos){
        // std::cout<<"mot trouver a la position "<<pos+1<<"\n";
@@ -192,6 +197,7 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
             if(varavants!='('&& varavants!=' '&& varavants!=')'){
             resultlog +=varavants;
            varavant.push_back(varavants);
+                 
          //  std::cout<<"et la variable avant OR est  "<<logique[pos-1]<<"\n";
            }
        
@@ -210,11 +216,11 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
                varapres.push_back(varapress); 
                 
             }
-          //  if(varaps==' '||varaps=='('){
-            //    varaps++;
-           // varap.push_back(varaps);//je viens dajouter
-            //}
-           // std::cout<<"la varible apres OR est  "<<varapress<<"\n";
+          /*  if(varaps==' '||varaps=='('){
+                varaps++;
+            varap.push_back(varaps);//je viens d'ajouter
+            }
+           std::cout<<"la varible apres OR est  "<<varapress<<"\n"; */
             
         }
         
@@ -227,13 +233,9 @@ void veriflogOR(const std::string& logique, std::string& result,std::string& res
     for(char var:varavant){
         result+=var;
     }
-     for(char var:varapres){//cetait varapres mais si tu veux ->varap
+     for(char var:varapres){  //c'etait varapres mais si tu veux ->varap
         result+=var;
-    }
-
-    
- 
-     
+    }   
 }
  
  //fonction de verification de si il exsiste une porte NOT dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
@@ -284,13 +286,8 @@ void veriflogNOT(const std::string& logique, std::string& result,std::string& re
      for(char var:varapres){
         result+=var;
     }
-
-    
-
      
 }
-
-
 
 //fonction de verification de si il exsiste une porte AND dans la formule saisie si oui affiche les variable qui se trouve avant et apres la prote
 void veriflogXoR(const std::string& logique,std::string& result,std::string& resultlog){
@@ -340,7 +337,7 @@ void veriflogXoR(const std::string& logique,std::string& result,std::string& res
         result+=var;
     }
 }
-//fonction
+//fonctions
 void affect(std::string chaine,std::string & var1,std::string & var2,std::string & var3,std::string & var4){
     int trouve=0;
     size_t pos =0;
@@ -518,7 +515,6 @@ void XORXOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
-
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -577,7 +573,6 @@ void ANDXOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
-
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -635,7 +630,6 @@ void ANDAND(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
-
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -692,7 +686,6 @@ void ORAND(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
-
 
    val3[0]=0;
    val3[1]=1;
@@ -752,7 +745,6 @@ void ORXOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
-
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -809,7 +801,6 @@ void OROR(int sol[8]){
    val2[5]=0;
    val2[6]=1;
    val2[7]=1;
-
 
    val3[0]=0;
    val3[1]=1;
@@ -869,7 +860,6 @@ void ANDOR(int sol[8]){
    val2[6]=1;
    val2[7]=1;
 
-
    val3[0]=0;
    val3[1]=1;
    val3[2]=0;
@@ -905,7 +895,7 @@ void ANDOR(int sol[8]){
 }
 
 
-//fonction dassociation de 3 porte logique a 4variables
+//fonctions dassociation de 3 porte logique a 4variables
 void ORANDXOR(int sol[16]){
       int val1[16]={0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
       int val2[16]={0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
@@ -945,7 +935,6 @@ void ORANDXOR(int sol[16]){
         std::cout<<"\n";
     }
 }
-
 
 //fonction dassociation de 3 porte logique a 4variables
 void ANDXOROR(int sol[16]){
