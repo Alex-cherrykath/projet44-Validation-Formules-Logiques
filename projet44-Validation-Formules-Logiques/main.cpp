@@ -16,9 +16,10 @@ int main(){
      int slog2[16];
      int Tvar,Tvar1,Tvar2,Tvar3,Tvar4;
 
-     std::cout<<"************** BIENVENUE A VOUS!**************\n\n";
-    std::cout<<"entrez une formule logique a maximum 5 variabble  et 'quit' si vous voulez quiter\n";
-    std::cout<<"pour des soucis de code XOR sera considerer ssi il est ecris avec o minuscule merci:)\n";
+    std::cout<<"************** BIENVENUE A VOUS!**************\n\n";
+    std::cout<<"Entrez une formule logique à maximum 5 variables;
+    std::cout<<" Entrez 'quit' si vous voulez quitter\n";
+    std::cout<<"Pour des soucis de code XOR sera considerer ssi il est ecris avec o minuscule merci:)\n";
 
     std::getline(std::cin,logique);
      if (logique == "quit") {
@@ -28,7 +29,7 @@ int main(){
     std::cout<<"la formule logique a ete saisie dans cet orde\n"<<logique<<"\n";
     tailleformule(logique);
     
-  //appel de nos foction de verification de porte logique
+  //appel de nos fonctions de verification de porte logique
     veriflogAND(logique,varAND,portionlogAND);
     veriflogOR(logique, varOR,portionlogOR);
     veriflogNOT(logique, varNOT,portionlogNOT);
@@ -48,50 +49,52 @@ int main(){
       affect(logique,v1,v2,v3,v4); //on affecte a chaque chaine une porte logique se trouvant dans la chaine saisie
       std::cout<<"\n";
        std::cout<<v1<<" "<<v2<<" "<<v3<<" "<<v4<<"S\n";
-    while(Tvar>5){ //si la limite de variable est depasser message derreur
+        
+    while(Tvar>5){ b//si la limite de variable est depasser message derreur
+                  
         std::cout<<"ERREUR! VOUS AVEZ SAISIE TROP DE VARIABLE DANS VOTRE FORMULE\n";
     }
-    if(Tvar==1&&Tvar3==4){//une porte une variable (NOt)
+    if(Tvar==1&&Tvar3==4){ //une porte une variable (NOt)
         non(slog);
     }
-    if(Tvar==2&&Tvar1==5){//une  porte 2 variable(AND)
+    if(Tvar==2&&Tvar1==5){ //une  porte 2 variable(AND)
         et(slog);
-   }else if(Tvar==2&&Tvar2==4){//une  porte 2 variable(OR)
+   }else if(Tvar==2&&Tvar2==4){ //une  porte 2 variable(OR)
        OU(slog);
-    }else if(Tvar==2&&Tvar4==5){//une  porte 2 variable(xOR)
+    }else if(Tvar==2&&Tvar4==5){ //une  porte 2 variable(xOR)
         OUEX(slog);
     }
-    if(Tvar==3&&v1=="XoR"&&v2=="AND"){//si la premiere porte est XoR et la seconde AND
+    if(Tvar==3&&v1=="XoR"&&v2=="AND"){ //si la premiere porte est XoR et la seconde AND
      XORAND(slog);
        // std::cout<<"oui continue\n";
     }else if(Tvar==3&&v1=="XoR"&&v2=="OR"){ //si la premiere porte est XoR et la seconde OR
      XOROR(slog);
        // std::cout<<"oui continue\n";
-    }else if(Tvar==3&&v1=="XoR"&&v2=="XoR"){//si la premiere porte est XoR et la seconde OR
+    }else if(Tvar==3&&v1=="XoR"&&v2=="XoR"){ //si la premiere porte est XoR et la seconde OR
          XORXOR(slog);
-    }else if(Tvar==3&&v1=="AND"&&v2=="OR"){//si la premiere porte est AND et la seconde OR
+    }else if(Tvar==3&&v1=="AND"&&v2=="OR"){ //si la premiere porte est AND et la seconde OR
          ANDOR(slog);
-    }else if(Tvar==3&&v1=="AND"&&v2=="XoR"){//si la premiere porte est AND et la seconde XOR
+    }else if(Tvar==3&&v1=="AND"&&v2=="XoR"){ //si la premiere porte est AND et la seconde XOR
          ANDXOR(slog);
-    }else if(Tvar==3&&v1=="OR"&&v2=="AND"){//si la premiere porte est OR et la seconde AND
+    }else if(Tvar==3&&v1=="OR"&&v2=="AND"){ //si la premiere porte est OR et la seconde AND
          ORAND(slog);
-    }else if(Tvar==3&&v1=="OR"&&v2=="XoR"){//si la premiere porte est OR et la seconde XOR
+    }else if(Tvar==3&&v1=="OR"&&v2=="XoR"){ //si la premiere porte est OR et la seconde XOR
          ORXOR(slog);
-    }else if(Tvar==3&&v1=="AND"&&v2=="AND"){//si la premiere porte est AND et la seconde AND
+    }else if(Tvar==3&&v1=="AND"&&v2=="AND"){ //si la premiere porte est AND et la seconde AND
          ANDAND(slog);
-         }else if(Tvar==3&&v1=="OR"&&v2=="OR"){//si la premiere porte est OR et la seconde OR
+         }else if(Tvar==3&&v1=="OR"&&v2=="OR"){ //si la premiere porte est OR et la seconde OR
          OROR(slog);
-         }else if(Tvar==4&&v1=="AND"&&v2=="OR"&&v3=="XoR"){//la premiere porte est AND 2emOR 3eme XOR
+         }else if(Tvar==4&&v1=="AND"&&v2=="OR"&&v3=="XoR"){ //la premiere porte est AND 2emOR 3eme XOR
           ANDORXOR(slog);
-         }else if(Tvar==4&&v1=="AND"&&v2=="XoR"&&v3=="OR"){//porte 1 AND 2eme XOR 3emeOR
+         }else if(Tvar==4&&v1=="AND"&&v2=="XoR"&&v3=="OR"){ //porte 1 AND 2eme XOR 3emeOR
           ANDXOROR(slog2);
-         }else if(Tvar==4&&v1=="OR"&&v2=="AND"&&v3=="XoR"){//la premiere porte OR 2eme AND 3eme XOR
+         }else if(Tvar==4&&v1=="OR"&&v2=="AND"&&v3=="XoR"){ //la premiere porte OR 2eme AND 3eme XOR
           ORANDXOR(slog2);
-         }else if(Tvar==4&&v1=="XoR"&&v2=="OR"&&v3=="AND"){//la premiere porte XOR 2emeOR 3eme AND
+         }else if(Tvar==4&&v1=="XoR"&&v2=="OR"&&v3=="AND"){ //la premiere porte XOR 2emeOR 3eme AND
           XORORAND(slog2);
-         }else if(Tvar==4&&v1=="OR"&&v2=="XoR"&&v3=="AND"){//la premiere porte XOR 2eme OR 3eme AND
+         }else if(Tvar==4&&v1=="OR"&&v2=="XoR"&&v3=="AND"){ //la premiere porte XOR 2eme OR 3eme AND
           ORXORAND(slog2);
-         }else if(Tvar==4&&v1=="XoR"&&v2=="AND"&&v3=="OR"){//fait
+         }else if(Tvar==4&&v1=="XoR"&&v2=="AND"&&v3=="OR"){ //fait
           XORANDOR(slog2);
          }
 
